@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище JudoDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Fights">
+          <Key>
+            <PropertyRef Name="WhiteParticipantId" />
+            <PropertyRef Name="RedParticipantId" />
+          </Key>
+          <Property Name="WhiteParticipantId" Type="int" Nullable="false" />
+          <Property Name="RedParticipantId" Type="int" Nullable="false" />
+          <Property Name="WhitePoints" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="RedPoints" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BaseWeight" Type="int" Nullable="false" />
+          <Property Name="BaseAge" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TatamiId" Type="int" />
+        </EntityType>
+        <EntityType Name="Participants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Street" Type="nvarchar" MaxLength="200" />
+          <Property Name="Weight" Type="decimal" Precision="5" Scale="1" />
+        </EntityType>
+        <EntityType Name="Participants_Groups">
+          <Key>
+            <PropertyRef Name="ParticipantID" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="ParticipantID" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participants_Sportsclubs">
+          <Key>
+            <PropertyRef Name="ParticipantID" />
+            <PropertyRef Name="SportsclubID" />
+          </Key>
+          <Property Name="ParticipantID" Type="int" Nullable="false" />
+          <Property Name="SportsclubID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participants_Towns">
+          <Key>
+            <PropertyRef Name="ParticipantId" />
+            <PropertyRef Name="TownId" />
+          </Key>
+          <Property Name="ParticipantId" Type="int" Nullable="false" />
+          <Property Name="TownId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participants_Users">
+          <Key>
+            <PropertyRef Name="ParticipantId" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ParticipantId" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sportsclubs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tatamies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Towns">
+          <Key>
+            <PropertyRef Name="Index" />
+          </Key>
+          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Fights__RedParti__5070F446">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Fights" Type="Self.Fights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fights">
+              <PropertyRef Name="RedParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fights__WhitePar__4F7CD00D">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Fights" Type="Self.Fights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fights">
+              <PropertyRef Name="WhiteParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__TatamiId__412EB0B6">
+          <End Role="Tatamies" Type="Self.Tatamies" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tatamies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="TatamiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Group__4CA06362">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Participants_Groups" Type="Self.Participants_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Groups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Parti__440B1D61">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Participants_Towns" Type="Self.Participants_Towns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Towns">
+              <PropertyRef Name="ParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Parti__47DBAE45">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Participants_Sportsclubs" Type="Self.Participants_Sportsclubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Sportsclubs">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Parti__4BAC3F29">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Participants_Groups" Type="Self.Participants_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Groups">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Parti__5535A963">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Participants_Users" Type="Self.Participants_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Users">
+              <PropertyRef Name="ParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Sport__48CFD27E">
+          <End Role="Sportsclubs" Type="Self.Sportsclubs" Multiplicity="1" />
+          <End Role="Participants_Sportsclubs" Type="Self.Participants_Sportsclubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sportsclubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Sportsclubs">
+              <PropertyRef Name="SportsclubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__TownI__44FF419A">
+          <End Role="Towns" Type="Self.Towns" Multiplicity="1" />
+          <End Role="Participants_Towns" Type="Self.Participants_Towns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towns">
+              <PropertyRef Name="Index" />
+            </Principal>
+            <Dependent Role="Participants_Towns">
+              <PropertyRef Name="TownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__UserI__5629CD9C">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Participants_Users" Type="Self.Participants_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participants_Users">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище JudoDBModelContainer">
+          <EntitySet Name="Fights" EntityType="Self.Fights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants_Groups" EntityType="Self.Participants_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants_Sportsclubs" EntityType="Self.Participants_Sportsclubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants_Towns" EntityType="Self.Participants_Towns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants_Users" EntityType="Self.Participants_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sportsclubs" EntityType="Self.Sportsclubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tatamies" EntityType="Self.Tatamies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Towns" EntityType="Self.Towns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Fights__RedParti__5070F446" Association="Self.FK__Fights__RedParti__5070F446">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Fights" EntitySet="Fights" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fights__WhitePar__4F7CD00D" Association="Self.FK__Fights__WhitePar__4F7CD00D">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Fights" EntitySet="Fights" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__TatamiId__412EB0B6" Association="Self.FK__Groups__TatamiId__412EB0B6">
+            <End Role="Tatamies" EntitySet="Tatamies" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Group__4CA06362" Association="Self.FK__Participa__Group__4CA06362">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Participants_Groups" EntitySet="Participants_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Parti__440B1D61" Association="Self.FK__Participa__Parti__440B1D61">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Participants_Towns" EntitySet="Participants_Towns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Parti__47DBAE45" Association="Self.FK__Participa__Parti__47DBAE45">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Participants_Sportsclubs" EntitySet="Participants_Sportsclubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Parti__4BAC3F29" Association="Self.FK__Participa__Parti__4BAC3F29">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Participants_Groups" EntitySet="Participants_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Parti__5535A963" Association="Self.FK__Participa__Parti__5535A963">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Participants_Users" EntitySet="Participants_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Sport__48CFD27E" Association="Self.FK__Participa__Sport__48CFD27E">
+            <End Role="Sportsclubs" EntitySet="Sportsclubs" />
+            <End Role="Participants_Sportsclubs" EntitySet="Participants_Sportsclubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__TownI__44FF419A" Association="Self.FK__Participa__TownI__44FF419A">
+            <End Role="Towns" EntitySet="Towns" />
+            <End Role="Participants_Towns" EntitySet="Participants_Towns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__UserI__5629CD9C" Association="Self.FK__Participa__UserI__5629CD9C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Participants_Users" EntitySet="Participants_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JudoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Fight">
+          <Key>
+            <PropertyRef Name="WhiteParticipantId" />
+            <PropertyRef Name="RedParticipantId" />
+          </Key>
+          <Property Name="WhiteParticipantId" Type="Int32" Nullable="false" />
+          <Property Name="RedParticipantId" Type="Int32" Nullable="false" />
+          <Property Name="WhitePoints" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="RedPoints" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK__Fights__RedParti__5070F446" FromRole="Fights" ToRole="Participants" />
+          <NavigationProperty Name="Participant1" Relationship="Self.FK__Fights__WhitePar__4F7CD00D" FromRole="Fights" ToRole="Participants" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BaseWeight" Type="Int32" Nullable="false" />
+          <Property Name="BaseAge" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TatamiId" Type="Int32" />
+          <NavigationProperty Name="Tatamy" Relationship="Self.FK__Groups__TatamiId__412EB0B6" FromRole="Groups" ToRole="Tatamies" />
+          <NavigationProperty Name="Participants" Relationship="Self.Participants_Groups" FromRole="Groups" ToRole="Participants" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Street" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Decimal" Precision="5" Scale="1" />
+          <NavigationProperty Name="Fights" Relationship="Self.FK__Fights__RedParti__5070F446" FromRole="Participants" ToRole="Fights" />
+          <NavigationProperty Name="Fights1" Relationship="Self.FK__Fights__WhitePar__4F7CD00D" FromRole="Participants" ToRole="Fights" />
+          <NavigationProperty Name="Groups" Relationship="Self.Participants_Groups" FromRole="Participants" ToRole="Groups" />
+          <NavigationProperty Name="Sportsclubs" Relationship="Self.Participants_Sportsclubs" FromRole="Participants" ToRole="Sportsclubs" />
+          <NavigationProperty Name="Towns" Relationship="Self.Participants_Towns" FromRole="Participants" ToRole="Towns" />
+          <NavigationProperty Name="Users" Relationship="Self.Participants_Users" FromRole="Participants" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Sportsclub">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Participants" Relationship="Self.Participants_Sportsclubs" FromRole="Sportsclubs" ToRole="Participants" />
+        </EntityType>
+        <EntityType Name="Tatamy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK__Groups__TatamiId__412EB0B6" FromRole="Tatamies" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="Index" />
+          </Key>
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Participants" Relationship="Self.Participants_Towns" FromRole="Towns" ToRole="Participants" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Participants" Relationship="Self.Participants_Users" FromRole="Users" ToRole="Participants" />
+        </EntityType>
+        <Association Name="FK__Fights__RedParti__5070F446">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Fights" Type="Self.Fight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fights">
+              <PropertyRef Name="RedParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fights__WhitePar__4F7CD00D">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Fights" Type="Self.Fight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fights">
+              <PropertyRef Name="WhiteParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__TatamiId__412EB0B6">
+          <End Role="Tatamies" Type="Self.Tatamy" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tatamies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="TatamiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Participants_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+        </Association>
+        <Association Name="Participants_Sportsclubs">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <End Role="Sportsclubs" Type="Self.Sportsclub" Multiplicity="*" />
+        </Association>
+        <Association Name="Participants_Towns">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <End Role="Towns" Type="Self.Town" Multiplicity="*" />
+        </Association>
+        <Association Name="Participants_Users">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="JudoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Fights" EntityType="Self.Fight" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Participants" EntityType="Self.Participant" />
+          <EntitySet Name="Sportsclubs" EntityType="Self.Sportsclub" />
+          <EntitySet Name="Tatamies" EntityType="Self.Tatamy" />
+          <EntitySet Name="Towns" EntityType="Self.Town" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Fights__RedParti__5070F446" Association="Self.FK__Fights__RedParti__5070F446">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Fights" EntitySet="Fights" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fights__WhitePar__4F7CD00D" Association="Self.FK__Fights__WhitePar__4F7CD00D">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Fights" EntitySet="Fights" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__TatamiId__412EB0B6" Association="Self.FK__Groups__TatamiId__412EB0B6">
+            <End Role="Tatamies" EntitySet="Tatamies" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="Participants_Groups" Association="Self.Participants_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="Participants_Sportsclubs" Association="Self.Participants_Sportsclubs">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Sportsclubs" EntitySet="Sportsclubs" />
+          </AssociationSet>
+          <AssociationSet Name="Participants_Towns" Association="Self.Participants_Towns">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Towns" EntitySet="Towns" />
+          </AssociationSet>
+          <AssociationSet Name="Participants_Users" Association="Self.Participants_Users">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище JudoDBModelContainer" CdmEntityContainer="JudoDBEntities">
+          <EntitySetMapping Name="Fights">
+            <EntityTypeMapping TypeName="JudoDBModel.Fight">
+              <MappingFragment StoreEntitySet="Fights">
+                <ScalarProperty Name="WhiteParticipantId" ColumnName="WhiteParticipantId" />
+                <ScalarProperty Name="RedParticipantId" ColumnName="RedParticipantId" />
+                <ScalarProperty Name="WhitePoints" ColumnName="WhitePoints" />
+                <ScalarProperty Name="RedPoints" ColumnName="RedPoints" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="JudoDBModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BaseWeight" ColumnName="BaseWeight" />
+                <ScalarProperty Name="BaseAge" ColumnName="BaseAge" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="TatamiId" ColumnName="TatamiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="JudoDBModel.Participant">
+              <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sportsclubs">
+            <EntityTypeMapping TypeName="JudoDBModel.Sportsclub">
+              <MappingFragment StoreEntitySet="Sportsclubs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tatamies">
+            <EntityTypeMapping TypeName="JudoDBModel.Tatamy">
+              <MappingFragment StoreEntitySet="Tatamies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Towns">
+            <EntityTypeMapping TypeName="JudoDBModel.Town">
+              <MappingFragment StoreEntitySet="Towns">
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="JudoDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Participants_Groups" TypeName="JudoDBModel.Participants_Groups" StoreEntitySet="Participants_Groups">
+            <EndProperty Name="Groups">
+              <ScalarProperty Name="Id" ColumnName="GroupId" />
+            </EndProperty>
+            <EndProperty Name="Participants">
+              <ScalarProperty Name="Id" ColumnName="ParticipantID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Participants_Sportsclubs" TypeName="JudoDBModel.Participants_Sportsclubs" StoreEntitySet="Participants_Sportsclubs">
+            <EndProperty Name="Participants">
+              <ScalarProperty Name="Id" ColumnName="ParticipantID" />
+            </EndProperty>
+            <EndProperty Name="Sportsclubs">
+              <ScalarProperty Name="Id" ColumnName="SportsclubID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Participants_Towns" TypeName="JudoDBModel.Participants_Towns" StoreEntitySet="Participants_Towns">
+            <EndProperty Name="Participants">
+              <ScalarProperty Name="Id" ColumnName="ParticipantId" />
+            </EndProperty>
+            <EndProperty Name="Towns">
+              <ScalarProperty Name="Index" ColumnName="TownId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Participants_Users" TypeName="JudoDBModel.Participants_Users" StoreEntitySet="Participants_Users">
+            <EndProperty Name="Participants">
+              <ScalarProperty Name="Id" ColumnName="ParticipantId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

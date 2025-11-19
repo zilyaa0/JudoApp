@@ -1,0 +1,18 @@
+﻿<Window x:Class="JudoApp.NavigationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JudoApp"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        Title="Навигационное окно" MinHeight="150" MinWidth="300" MaxHeight="450" MaxWidth="800" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <UniformGrid Columns="2">
+        <TextBlock/>
+        <Button HorizontalAlignment="Right"  Style="{StaticResource ExitButtonStyle}" Click="ExitButton_Click"/>
+        <Button Content="Просмотр участников" Style="{StaticResource ButtonStyle}" Click="PartisipantsButton_Click"/>
+        <Button Content="Просмотр татами" Style="{StaticResource ButtonStyle}" Click="TatamiButton_Click"/>
+        <Button Content="Перейти к группам" Style="{StaticResource ButtonStyle}" Click="GroupsButton_Click"/>
+        <Button Content="Перейти к управлению" Style="{StaticResource ButtonStyle}" Click="ControlButton_Click"/>
+    </UniformGrid>
+</Window>

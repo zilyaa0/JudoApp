@@ -1,0 +1,121 @@
+﻿<Window x:Class="JudoApp.ControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JudoApp"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        Title="Окно управления" MinHeight="450" MinWidth="700" MaxHeight="600" SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="Manual" 
+        Left="30"
+        Top="30">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+            <Setter Property="Width" Value="115"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0 10" Text="Окно упраления" Foreground="#050589" FontWeight="ExtraBold" FontSize="18" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="2" Padding="20" Background="#050589" Foreground="White" Margin="21 10" VerticalAlignment="Top" TextAlignment="Left">
+            <Run Text="Конец схватки/"/>
+            <LineBreak/>
+            <Run Text="Начало следующей схватки"/>
+        </TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Padding="20" Width="250" HorizontalAlignment="Left" Background="#050589" Foreground="White" Margin="21 10" TextAlignment="Left">
+                <Run Text="Запуск таймера/"/>
+                <LineBreak/>
+                <Run Text="Остановка таймера"/>
+            </TextBlock>
+            <TextBlock Padding="20" Width="250" HorizontalAlignment="Left" Background="#050589" Foreground="White" Margin="21 10" TextWrapping="WrapWithOverflow" TextAlignment="Left">
+                 <Run Text="Запуск малого таймера/"/>
+                 <LineBreak/>
+                 <Run Text="Остановка малого таймера (удержание времени)"/>
+            </TextBlock>
+        </StackPanel>
+        <Grid Grid.Row="3" Margin="0 0 0 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="3">
+                <Button>
+                    <Button.Content>
+                        <TextBlock>
+                            <Run Text="Белый"/>
+                            <LineBreak/>
+                            <Run Text="иппон"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <TextBlock>
+                             <Run Text="Белый"/>
+                             <LineBreak/>
+                             <Run Text="ваза-ари"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <TextBlock>
+                             <Run Text="Белый"/>
+                             <LineBreak/>
+                             <Run Text="предупреждение"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="3">
+                <Button>
+                    <Button.Content>
+                        <TextBlock>
+                            <Run Text="Красный"/>
+                            <LineBreak/>
+                            <Run Text="иппон"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <TextBlock>
+                             <Run Text="Красный"/>
+                             <LineBreak/>
+                             <Run Text="ваза-ари"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <TextBlock>
+                             <Run Text="Красный"/>
+                             <LineBreak/>
+                             <Run Text="предупреждение"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <Button Margin="3" Width="270" Height="36" Grid.Row="1" Grid.ColumnSpan="2" Content="Сбросить последний ввод"/>
+        </Grid>
+    </Grid>
+</Window>

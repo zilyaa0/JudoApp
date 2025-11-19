@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5989cf2539824cc6a7f1fd0a9548e013" Name="Diagram1">
+        <EntityTypeShape EntityType="JudoDBModel.Fight" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JudoDBModel.Group" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JudoDBModel.Participant" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JudoDBModel.Sportsclub" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JudoDBModel.Tatamy" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JudoDBModel.Town" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="JudoDBModel.User" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="JudoDBModel.FK__Fights__RedParti__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="JudoDBModel.FK__Fights__WhitePar__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="JudoDBModel.FK__Groups__TatamiId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="JudoDBModel.Participants_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="JudoDBModel.Participants_Sportsclubs" ManuallyRouted="false" />
+        <AssociationConnector Association="JudoDBModel.Participants_Towns" ManuallyRouted="false" />
+        <AssociationConnector Association="JudoDBModel.Participants_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

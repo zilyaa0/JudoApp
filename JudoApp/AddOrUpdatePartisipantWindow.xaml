@@ -1,0 +1,64 @@
+﻿<Window x:Class="JudoApp.AddOrUpdatePartisipantWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JudoApp"
+        mc:Ignorable="d"
+            Style="{StaticResource WindowStyle}"
+    Title="Добавление/Редактирование данных" MinHeight="150" MinWidth="300" MaxHeight="450" MaxWidth="800" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="3" Style="{StaticResource ExitButtonStyle}" Click="ExitButton_Click"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="ФИО"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Пол"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Дата рождения"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Вес (кг)"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Спортклуб" Margin="0,0,10,5"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Город"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Улица"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource TextBoxStyle}"  x:Name="fioBox"/>
+        <ComboBox Grid.Row="2" Grid.Column="2" x:Name="genderComboBox" Style="{StaticResource ComboBoxStyle}">
+            <ComboBoxItem Content="Мужской" Tag="m"/>
+            <ComboBoxItem Content="Женский" Tag="f"/>
+        </ComboBox>
+        <DatePicker Grid.Row="3" Grid.Column="2" x:Name="birthDatePicker" Margin="3"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBoxStyle}" x:Name="weightBox"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" x:Name="sportsclubComboBox" Style="{StaticResource ComboBoxStyle}"
+                  IsEditable="True" 
+                  Text="{Binding NewSportsclub, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="6" Grid.Column="2" x:Name="townComboBox" 
+                  IsEditable="True" Style="{StaticResource ComboBoxStyle}"
+                  Text="{Binding NewTown, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource TextBoxStyle}" x:Name="streetBox" Margin="0,0,0,5"/>
+        <Button  Grid.Column="2" Grid.Row="8" Content="Сохранить" Style="{StaticResource ButtonStyle}" Click="ExitButton_Click"/>
+    </Grid>
+</Window>
