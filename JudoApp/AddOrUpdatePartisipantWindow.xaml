@@ -34,31 +34,21 @@
         <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Город"/>
         <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource TextBlockStyle}" Text="Улица"/>
         <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource TextBoxStyle}"  x:Name="fioBox"/>
-        <ComboBox Grid.Row="2" Grid.Column="2" x:Name="genderComboBox" Style="{StaticResource ComboBoxStyle}">
+        <ComboBox Grid.Row="2" Grid.Column="2" x:Name="genderComboBox" Style="{StaticResource ComboBoxStyle}" SelectedIndex="-1">
             <ComboBoxItem Content="Мужской" Tag="m"/>
             <ComboBoxItem Content="Женский" Tag="f"/>
         </ComboBox>
         <DatePicker Grid.Row="3" Grid.Column="2" x:Name="birthDatePicker" Margin="3"/>
         <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBoxStyle}" x:Name="weightBox"/>
-        <ComboBox Grid.Row="5" Grid.Column="2" x:Name="sportsclubComboBox" Style="{StaticResource ComboBoxStyle}"
+        <ComboBox Grid.Row="5" DisplayMemberPath="Name" Grid.Column="2" x:Name="sportsclubComboBox" Style="{StaticResource ComboBoxStyle}" SelectedIndex="-1"
                   IsEditable="True" 
                   Text="{Binding NewSportsclub, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Grid.Row="6" Grid.Column="2" x:Name="townComboBox" 
+        <ComboBox Grid.Row="6" Grid.Column="2" x:Name="townComboBox"  SelectedIndex="-1"
                   IsEditable="True" Style="{StaticResource ComboBoxStyle}"
-                  Text="{Binding NewTown, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
+                  Text="{Binding NewTown, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name">
         </ComboBox>
-        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource TextBoxStyle}" x:Name="streetBox" Margin="0,0,0,5"/>
-        <Button  Grid.Column="2" Grid.Row="8" Content="Сохранить" Style="{StaticResource ButtonStyle}" Click="ExitButton_Click"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource TextBoxStyle}" x:Name="streetBox"/>
+        <Button  Grid.Column="2" Grid.Row="8" Content="Сохранить" Style="{StaticResource ButtonStyle}" Click="SaveButton_Click"/>
     </Grid>
 </Window>

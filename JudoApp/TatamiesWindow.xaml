@@ -7,7 +7,77 @@
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}"
         Title="Окно данных татами" MinHeight="450" MinWidth="800" MaxHeight="600" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Button Grid.Column="3" Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
-    </Grid>
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Button DockPanel.Dock="Top" Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="tatamiItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10,20,10,0" BorderThickness="1" BorderBrush="Black" Background="White">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="320"/>
+                                        <ColumnDefinition Width="320"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0">
+                                        <TextBlock Text="{Binding TatamiName}" FontWeight="Bold"/>
+                                    </Border>
+                                    <Border Grid.Column="1">
+                                        <TextBlock Text="Красный"/>
+                                    </Border>
+                                    <Border Grid.Column="2" BorderThickness="1 1 0 1">
+                                        <TextBlock Text="Белый"/>
+                                    </Border>
+                                </Grid>
+
+                                <DataGrid ItemsSource="{Binding Fights}"
+                                          AutoGenerateColumns="False"
+                                          HeadersVisibility="Column"
+                                          CanUserAddRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding StageLabel}" Width="100" Header="Этап"/>
+                                        <DataGridTextColumn Binding="{Binding AgeCategory}" Width="100">
+                                            <DataGridTextColumn.Header>
+                                                <TextBlock>
+                                                    <Run Text="Возрастная"/>
+                                                    <LineBreak/>
+                                                    <Run Text="категория"/>
+                                                </TextBlock>
+                                            </DataGridTextColumn.Header>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Пол" Binding="{Binding Gender}" Width="50"/>
+                                        <DataGridTextColumn Binding="{Binding WeightCategory}" Width="100">
+                                            <DataGridTextColumn.Header>
+                                                <TextBlock>
+                                                    <Run Text="Весовая"/>
+                                                    <LineBreak/>
+                                                    <Run Text="категория"/>
+                                                </TextBlock>
+                                            </DataGridTextColumn.Header>
+                                        </DataGridTextColumn>
+
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding RedFirstName}" Width="100"/>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding RedLastName}" Width="100"/>
+                                        <DataGridTextColumn Header="Клуб" Binding="{Binding RedClub}" Width="120"/>
+
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding WhiteFirstName}" Width="100"/>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding WhiteLastName}" Width="100"/>
+                                        <DataGridTextColumn Header="Клуб" Binding="{Binding WhiteClub}" Width="120"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
 </Window>

@@ -67,7 +67,7 @@
                 <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="3" x:Name="changeOrdersPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="3" x:Name="changeOrdersPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
             <Button Style="{StaticResource ResourceKey=ButtonStyle}" Content="Добавить участника" Click="AddButton_Click"/>
             <Button Margin="70 0 0 0" Style="{StaticResource ResourceKey=ButtonStyle}" Content="Удалить участника"/>
         </StackPanel>

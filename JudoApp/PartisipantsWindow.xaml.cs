@@ -21,7 +21,6 @@ namespace JudoApp
                 using (var db = new JudoDBEntities())
                 {
                     allParticipants = db.Participants
-                       .Where(p => p.Groups.Count >= 1)
                        .Include(p => p.Sportsclubs)
                        .Include(p => p.Towns)
                        .Include(p => p.Groups)

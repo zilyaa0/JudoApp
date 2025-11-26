@@ -6,8 +6,80 @@
         xmlns:local="clr-namespace:JudoApp"
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}"
-        Title="Окно групп участников" MinHeight="450" MinWidth="800" MaxHeight="600" MaxWidth="800" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Окно групп участников" MinHeight="450" MinWidth="900" MaxHeight="700" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Grid.Column="3" Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
+
+        <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock x:Name="emptyStateTextBlock"
+                           Text="Нет участников, распределённых по группам."
+                           Foreground="Gray"
+                           FontStyle="Italic"
+                           Visibility="Collapsed"
+                           Margin="0,0,0,10"/>
+
+                <ItemsControl x:Name="groupsItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,20" BorderThickness="1" BorderBrush="Black" Background="White">
+                                <StackPanel Margin="10">
+                                    <TextBlock Text="{Binding DisplayTitle}" FontWeight="Bold" FontSize="14" Margin="0,0,0,10"/>
+
+                                    <ItemsControl ItemsSource="{Binding Sections}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0,0,0,15">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                                    <DataGrid ItemsSource="{Binding Fights}"
+                                                              AutoGenerateColumns="False"
+                                                              HeadersVisibility="Column"
+                                                              CanUserAddRows="False">
+                                                        <DataGrid.Columns>
+                                                            <DataGridTextColumn Binding="{Binding AgeCategory}" Width="100">
+                                                                <DataGridTextColumn.Header>
+                                                                    <TextBlock>
+                                                                        <Run Text="Возрастная"/>
+                                                                        <LineBreak/>
+                                                                        <Run Text="категория"/>
+                                                                    </TextBlock>
+                                                                </DataGridTextColumn.Header>
+                                                            </DataGridTextColumn>
+                                                            <DataGridTextColumn Header="Пол" Binding="{Binding Gender}" Width="50"/>
+                                                            <DataGridTextColumn Binding="{Binding WeightCategory}" Width="100">
+                                                                <DataGridTextColumn.Header>
+                                                                    <TextBlock>
+                                                                        <Run Text="Весовая"/>
+                                                                        <LineBreak/>
+                                                                        <Run Text="категория"/>
+                                                                    </TextBlock>
+                                                                </DataGridTextColumn.Header>
+                                                            </DataGridTextColumn>
+
+                                                            <DataGridTextColumn Header="Имя" Binding="{Binding RedFirstName}" Width="100"/>
+                                                            <DataGridTextColumn Header="Фамилия" Binding="{Binding RedLastName}" Width="100"/>
+                                                            <DataGridTextColumn Header="Клуб" Binding="{Binding RedClub}" Width="120"/>
+
+                                                            <DataGridTextColumn Header="Имя" Binding="{Binding WhiteFirstName}" Width="100"/>
+                                                            <DataGridTextColumn Header="Фамилия" Binding="{Binding WhiteLastName}" Width="100"/>
+                                                            <DataGridTextColumn Header="Клуб" Binding="{Binding WhiteClub}" Width="120"/>
+                                                        </DataGrid.Columns>
+                                                    </DataGrid>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

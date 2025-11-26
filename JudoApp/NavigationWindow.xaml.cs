@@ -21,10 +21,21 @@ namespace JudoApp
 
         private void ControlButton_Click(object sender, RoutedEventArgs e)
         {
-            var controlWin = new ControlWindow();
-            var competitionWin = new CompetitionWindow();
+            var controller = new TatamiMatchController();
+            var competitionWin = new CompetitionWindow(controller);
+            var controlWin = new ControlWindow(controller);
+
             controlWin.Show();
             competitionWin.Show();
+
+            controlWin.Closed += (_, __) =>
+            {
+                if (competitionWin.IsVisible)
+                {
+                    competitionWin.Close();
+                }
+            };
+
             Close();
         }
 

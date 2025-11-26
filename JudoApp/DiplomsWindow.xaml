@@ -1,0 +1,115 @@
+﻿<Window x:Class="JudoApp.DiplomsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JudoApp"
+        mc:Ignorable="d"
+        Title="DiplomsWindow" MinHeight="800" MinWidth="500">
+    <Window.Resources>
+        <DataTemplate x:Key="PageTemplate">
+            <Grid Margin="40" Height="750" Width="450">
+                <Path Fill="Yellow" Stretch="Fill">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="300,0" IsClosed="True">
+                                <LineSegment Point="450,0"/>
+                                <LineSegment Point="450,375"/>
+                                <LineSegment Point="300,300"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+                <Path Fill="Orange" Stretch="Fill">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="300,300" IsClosed="True">
+                                <LineSegment Point="450,375"/>
+                                <LineSegment Point="450,750"/>
+                                <LineSegment Point="150,750"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <Border BorderBrush="Black" BorderThickness="3" Padding="10">
+                    <Border BorderBrush="DarkGray" BorderThickness="1" Padding="20">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="Certificate" 
+                               FontSize="36" FontWeight="Bold" 
+                               HorizontalAlignment="Center" 
+                               Foreground="Black"
+                               Margin="0,20,0,30"/>
+
+                            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+                                <TextBlock Text="Competition" 
+                                   FontSize="20"
+                                   HorizontalAlignment="Center"/>
+                                <TextBlock Text="Organizer" 
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,5,0,20"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" HorizontalAlignment="Center" 
+                                VerticalAlignment="Center">
+                                <TextBlock Text="JUDO" 
+                                   FontSize="42" FontWeight="Bold" 
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,40"
+                                   Foreground="Black"/>
+                                <StackPanel HorizontalAlignment="Center" Margin="0,20,0,0">
+                                    <TextBlock 
+                                       FontSize="16" FontWeight="Medium"
+                                       HorizontalAlignment="Center">
+                                        <Run Text="Gender: "/>
+                                        <Run Text="{Binding Gender}"/>
+                                    </TextBlock>
+                                    <TextBlock Text="Weight-Class: 33 kg" 
+                                       FontSize="16" FontWeight="Medium"
+                                       HorizontalAlignment="Center" 
+                                       Margin="0,3,0,0">
+                                        <Run Text="Weight-Class: "/>
+                                        <Run Text="{Binding Weight}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3" HorizontalAlignment="Center">
+                                <TextBlock Text="1st Place" 
+                                   FontSize="28" FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   Foreground="Goldenrod"
+                                   Margin="0,0,0,15"/>
+                                <TextBlock Text="{Binding FIO}" 
+                                   FontSize="22" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Sportsclubs}" 
+                                   FontSize="16"
+                                   HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <Viewbox Grid.Row="4" Width="50" Stretch="Uniform" HorizontalAlignment="Left">
+                                <Image Source="/logo.jpg"/>
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <DocumentViewer x:Name="documentViewer">
+        </DocumentViewer>
+    </Grid>
+</Window>

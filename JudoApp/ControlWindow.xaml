@@ -6,116 +6,101 @@
         xmlns:local="clr-namespace:JudoApp"
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}"
-        Title="Окно управления" MinHeight="450" MinWidth="700" MaxHeight="600" SizeToContent="WidthAndHeight" 
-        WindowStartupLocation="Manual" 
-        Left="30"
-        Top="30">
-    <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="TextAlignment" Value="Center"/>
-        </Style>
-        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
-            <Setter Property="Width" Value="115"/>
-        </Style>
-    </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.8*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        Title="Окно управления" MinHeight="500" MinWidth="1100" WindowStartupLocation="Manual" Left="30" Top="30">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="1" Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0 10" Text="Окно упраления" Foreground="#050589" FontWeight="ExtraBold" FontSize="18" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Row="2" Padding="20" Background="#050589" Foreground="White" Margin="21 10" VerticalAlignment="Top" TextAlignment="Left">
-            <Run Text="Конец схватки/"/>
-            <LineBreak/>
-            <Run Text="Начало следующей схватки"/>
-        </TextBlock>
-        <StackPanel Grid.Row="2" Grid.Column="1">
-            <TextBlock Padding="20" Width="250" HorizontalAlignment="Left" Background="#050589" Foreground="White" Margin="21 10" TextAlignment="Left">
-                <Run Text="Запуск таймера/"/>
-                <LineBreak/>
-                <Run Text="Остановка таймера"/>
-            </TextBlock>
-            <TextBlock Padding="20" Width="250" HorizontalAlignment="Left" Background="#050589" Foreground="White" Margin="21 10" TextWrapping="WrapWithOverflow" TextAlignment="Left">
-                 <Run Text="Запуск малого таймера/"/>
-                 <LineBreak/>
-                 <Run Text="Остановка малого таймера (удержание времени)"/>
-            </TextBlock>
+
+        <Button Style="{StaticResource ExitButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ExitButton_Click"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,20,0,10">
+            <TextBlock VerticalAlignment="Center" Text="Номер татами:" FontWeight="SemiBold" Margin="0,0,10,0"/>
+            <TextBox x:Name="tatamiNumberTextBox" Width="60" Margin="0,0,10,0" Text="{Binding TatamiNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Width="130" Content="Загрузить" Margin="0,0,10,0" Click="LoadTatami_Click"/>
+            <TextBlock Text="{Binding StatusMessage}" Margin="10,0,0,0" VerticalAlignment="Center"/>
         </StackPanel>
-        <Grid Grid.Row="3" Margin="0 0 0 20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+
+        <Grid Grid.Row="2" Margin="0,10,0,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="3">
-                <Button>
-                    <Button.Content>
-                        <TextBlock>
-                            <Run Text="Белый"/>
-                            <LineBreak/>
-                            <Run Text="иппон"/>
-                        </TextBlock>
-                    </Button.Content>
-                </Button>
-                <Button>
-                    <Button.Content>
-                        <TextBlock>
-                             <Run Text="Белый"/>
-                             <LineBreak/>
-                             <Run Text="ваза-ари"/>
-                        </TextBlock>
-                    </Button.Content>
-                </Button>
-                <Button>
-                    <Button.Content>
-                        <TextBlock>
-                             <Run Text="Белый"/>
-                             <LineBreak/>
-                             <Run Text="предупреждение"/>
-                        </TextBlock>
-                    </Button.Content>
-                </Button>
+
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <GroupBox Header="Управление таймером" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+                        <TextBlock FontSize="36" FontWeight="Bold" Margin="0,0,15,0" Text="{Binding MainTimerSeconds, StringFormat={}{0}s}"/>
+                        <Button Width="120" Content="Старт" Margin="0,0,10,0" Click="MainTimerStart_Click"/>
+                        <Button Width="120" Content="Стоп" Margin="0,0,10,0" Click="MainTimerStop_Click"/>
+                        <Button Width="120" Content="Сброс" Click="ResetFight_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Удержание" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+                        <TextBlock FontSize="28" Margin="0,0,15,0" Text="{Binding HoldTimerSeconds, StringFormat={}{0}s}"/>
+                        <Button Width="120" Content="Старт" Margin="0,0,10,0" Click="HoldTimerStart_Click"/>
+                        <Button Width="120" Content="Стоп" Click="HoldTimerStop_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <Grid Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Белый" Margin="0,0,10,0">
+                        <StackPanel>
+                            <Button Content="Иппон" Margin="0,5" Click="WhiteIppon_Click"/>
+                            <Button Content="Ваза-ари" Margin="0,5" Click="WhiteWazaari_Click"/>
+                            <Button Content="Предупреждение" Margin="0,5" Click="WhitePenalty_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Красный" Grid.Column="1">
+                        <StackPanel>
+                            <Button Content="Иппон" Margin="0,5" Click="RedIppon_Click"/>
+                            <Button Content="Ваза-ари" Margin="0,5" Click="RedWazaari_Click"/>
+                            <Button Content="Предупреждение" Margin="0,5" Click="RedPenalty_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,20">
+                    <Button Width="160" Content="Конец схватки" Margin="0,0,15,0" Click="FinishFight_Click"/>
+                    <Button Width="160" Content="Сбросить ввод" Margin="0,0,15,0" Click="ResetFight_Click"/>
+                    <Button Width="160" Content="Пропустить" Click="SkipFight_Click"/>
+                </StackPanel>
+
+                <GroupBox Header="Очередь схваток">
+                    <ListView ItemsSource="{Binding UpcomingFights}" Height="150">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Этап" Width="80" DisplayMemberBinding="{Binding StageLabel}"/>
+                                <GridViewColumn Header="Категория" Width="140" DisplayMemberBinding="{Binding CategoryDisplay, Mode=OneWay}"/>
+                                <GridViewColumn Header="Белый" Width="150" DisplayMemberBinding="{Binding WhiteFullName, Mode=OneWay}"/>
+                                <GridViewColumn Header="Красный" Width="150" DisplayMemberBinding="{Binding RedFullName, Mode=OneWay}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </GroupBox>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="3">
-                <Button>
-                    <Button.Content>
-                        <TextBlock>
-                            <Run Text="Красный"/>
-                            <LineBreak/>
-                            <Run Text="иппон"/>
-                        </TextBlock>
-                    </Button.Content>
-                </Button>
-                <Button>
-                    <Button.Content>
-                        <TextBlock>
-                             <Run Text="Красный"/>
-                             <LineBreak/>
-                             <Run Text="ваза-ари"/>
-                        </TextBlock>
-                    </Button.Content>
-                </Button>
-                <Button>
-                    <Button.Content>
-                        <TextBlock>
-                             <Run Text="Красный"/>
-                             <LineBreak/>
-                             <Run Text="предупреждение"/>
-                        </TextBlock>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-            <Button Margin="3" Width="270" Height="36" Grid.Row="1" Grid.ColumnSpan="2" Content="Сбросить последний ввод"/>
+
+            <Border Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="8" Padding="10">
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" FontSize="16" Text="Экран соревнований (предпросмотр)" Margin="0,0,0,10"/>
+                    <Viewbox Height="320">
+                        <local:CompetitionDisplayControl/>
+                    </Viewbox>
+                </StackPanel>
+            </Border>
         </Grid>
+
+        <TextBlock Grid.Row="3" HorizontalAlignment="Left" Margin="0,10,0,0" Text="* Все результаты сохраняются после нажатия «Конец схватки»." FontStyle="Italic"/>
+        <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Content="Перейти к генерации дипломов" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>

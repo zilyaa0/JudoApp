@@ -76,8 +76,17 @@
     <Compile Include="ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DiplomsWindow.xaml.cs">
+      <DependentUpon>DiplomsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fight.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FightScheduleBuilder.cs" />
+    <Compile Include="TatamiMatchState.cs" />
+    <Compile Include="TatamiMatchController.cs" />
+    <Compile Include="CompetitionDisplayControl.xaml.cs">
+      <DependentUpon>CompetitionDisplayControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Group.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -151,6 +160,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CompetitionDisplayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiplomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GroupsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +231,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="logo.jpg" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
