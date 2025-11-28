@@ -5,33 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JudoApp"
         mc:Ignorable="d"
-        Title="DiplomsWindow" MinHeight="800" MinWidth="500">
+        Title="Дипломы" MinHeight="800" MinWidth="500">
     <Window.Resources>
         <DataTemplate x:Key="PageTemplate">
-            <Grid Margin="40" Height="750" Width="450">
-                <Path Fill="Yellow" Stretch="Fill">
-                    <Path.Data>
-                        <PathGeometry>
-                            <PathFigure StartPoint="300,0" IsClosed="True">
-                                <LineSegment Point="450,0"/>
-                                <LineSegment Point="450,375"/>
-                                <LineSegment Point="300,300"/>
-                            </PathFigure>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
+            <Grid Margin="40">
+                <Canvas Height="670" Width="450">
+                    <Path Fill="#FF8B00" Stretch="Fill" HorizontalAlignment="Center" Height="490" VerticalAlignment="Top" Canvas.Left="231.933" Width="218">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="300,0" IsClosed="True">
+                                    <LineSegment Point="450,0"/>
+                                    <LineSegment Point="450,700"/>
+                                    <LineSegment Point="420,660"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
 
-                <Path Fill="Orange" Stretch="Fill">
-                    <Path.Data>
-                        <PathGeometry>
-                            <PathFigure StartPoint="300,300" IsClosed="True">
-                                <LineSegment Point="450,375"/>
-                                <LineSegment Point="450,750"/>
-                                <LineSegment Point="150,750"/>
-                            </PathFigure>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
+                    <Path Fill="#FCE300" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="434" Canvas.Left="121" Height="236" Width="329">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="400,640" IsClosed="True">
+                                    <LineSegment Point="450,650"/>
+                                    <LineSegment Point="450,750"/>
+                                    <LineSegment Point="150,750"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
                 <Border BorderBrush="Black" BorderThickness="3" Padding="10">
                     <Border BorderBrush="DarkGray" BorderThickness="1" Padding="20">
                         <Grid>
@@ -74,7 +76,7 @@
                                         <Run Text="Gender: "/>
                                         <Run Text="{Binding Gender}"/>
                                     </TextBlock>
-                                    <TextBlock Text="Weight-Class: 33 kg" 
+                                    <TextBlock 
                                        FontSize="16" FontWeight="Medium"
                                        HorizontalAlignment="Center" 
                                        Margin="0,3,0,0">
@@ -88,7 +90,6 @@
                                 <TextBlock Text="1st Place" 
                                    FontSize="28" FontWeight="Bold"
                                    HorizontalAlignment="Center"
-                                   Foreground="Goldenrod"
                                    Margin="0,0,0,15"/>
                                 <TextBlock Text="{Binding FIO}" 
                                    FontSize="22" FontWeight="SemiBold"
@@ -99,7 +100,7 @@
                                    HorizontalAlignment="Center"/>
                             </StackPanel>
 
-                            <Viewbox Grid.Row="4" Width="50" Stretch="Uniform" HorizontalAlignment="Left">
+                            <Viewbox Grid.Row="4" Width="130" Stretch="Uniform" HorizontalAlignment="Left">
                                 <Image Source="/logo.jpg"/>
                             </Viewbox>
                         </Grid>
